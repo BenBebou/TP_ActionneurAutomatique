@@ -11,10 +11,10 @@ Pour ce faire, plusieurs réalisations intermédiaires sont à implémenter:
 
 ## Avancements
 * Le shell est codé et implémente les fonctions basique *help*, *pinout*, *start* et *stop*, où :
-** *help* renvoit le nom des trois autre commandes disponibles, ainsi que leur utilité
-** *pinout* renvoit la liste des broches du microcontrôleur utilisées, ainsi que leur rôle/assignation
-** *start*, qui ne fait rien pour le moment
-** *stop*, qui ne fait rien pour le moment
+ * *help* renvoit le nom des trois autre commandes disponibles, ainsi que leur utilité
+ * *pinout* renvoit la liste des broches du microcontrôleur utilisées, ainsi que leur rôle/assignation
+ * *start*, qui ne fait rien pour le moment
+ * *stop*, qui ne fait rien pour le moment
 * Les broches concernées sont activées et assignées aux bons protocoles
 * Fonctions de commandes codées : NON
 * Aasservissement réalisé : NON
