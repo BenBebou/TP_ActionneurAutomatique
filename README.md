@@ -24,4 +24,4 @@ Pour ce faire, plusieurs réalisations intermédiaires sont à implémenter:
   * *stop*, qui ne fait rien pour le moment
 * Les broches concernées sont activées et assignées aux bons protocoles
 * Fonctions de commandes codées : NON
-* Aasservissement réalisé : NON
+* Asservissement réalisé : NON
