@@ -1,4 +1,4 @@
-# TP ActionneurAutomatique
+# TP - Actionneurs et automatique appliquée
 
 ## Objectifs du TP
 Le but de ce TP filé est de réaliser la commande asservie d'un moteur à courant continu, par l'intermédiaire d'un shell et d'un hacheur à commande complémentaire décalée. Le software est executé sur une carte Nucleo (microcontrôleur STM32G474RET6).
