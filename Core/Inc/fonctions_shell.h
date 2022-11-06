@@ -1,0 +1,20 @@
+/**
+ * \file fonctions_shell.h
+ * \brief Header du fichier contenant les fonctions appelées par main.c
+ * \author RUIZ Guilhem, HERBELIN Benjamin, LENOIR Adrien
+ * \version 1
+ * \date 28 Octobre 2022
+ *
+ * Fichier header de fonctions_shell.c, qui contient toutes les fonctions pouvant être appelées dans le shell
+ *
+ */
+
+#ifndef INC_FONCTIONS_SHELL_H_
+#define INC_FONCTIONS_SHELL_H_
+
+void help(void);
+void pinout(void);
+int start(void);
+int stop(void);
+
+#endif /* INC_FONCTIONS_SHELL_H_ */

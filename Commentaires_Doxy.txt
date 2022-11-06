@@ -1,0 +1,70 @@
+##### main.c #####
+
+/**
+ * \file main.c
+ * \brief Shell pour la commande d'un hacheur.
+ * \author RUIZ Guilhem, HERBELIN Benjamin, LENOIR Adrien
+ * \version 1
+ * \date 28 Octobre 2022
+ *
+ * Shell de commande pour l'alimentation d'un moteur via un hacheur à commande complétaire décalée
+ *
+ */
+
+
+
+##### fonctions_shell.h #####
+
+/**
+ * \file fonctions_shell.h
+ * \brief Header du fichier contenant les fonctions appelées par main.c
+ * \author RUIZ Guilhem, HERBELIN Benjamin, LENOIR Adrien
+ * \version 1
+ * \date 28 Octobre 2022
+ *
+ * Fichier header de fonctions_shell.c, qui contient toutes les fonctions pouvant être appelées dans le shell
+ *
+ */
+
+
+
+##### fonctions_shell.c #####
+
+/**
+ * \file fonctions_shell.c
+ * \brief Fichier contenant les fonctions appelées par main.c
+ * \author RUIZ Guilhem, HERBELIN Benjamin, LENOIR Adrien
+ * \version 1
+ * \date 28 Octobre 2022
+ *
+ * Fichier contenant toutes les fonctions pouvant être appelées dans le shell
+ *
+ */
+
+/**
+* \fn void help (void)
+* \brief La fonction d'aide du shell, elle sert à lister les différentes fonctions disponibles
+* \param void
+* \return void
+*/
+
+/**
+* \fn void pinout (void)
+* \brief Renvoie le détail des broches connectées/initialisées et de leur fonction
+* \param void
+* \return void
+*/
+
+/**
+* \fn int start (void)
+* \brief Allume l'étage de puissance du moteur
+* \param void
+* \return void
+*/
+
+/**
+* \fn int stop (void)
+* \brief Eteint l'étage de puissance du moteur
+* \param void
+* \return void
+*/
