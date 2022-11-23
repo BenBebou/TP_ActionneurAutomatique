@@ -12,6 +12,8 @@
 #ifndef INC_FONCTIONS_SHELL_H_
 #define INC_FONCTIONS_SHELL_H_
 
+#include "main.h"
+
 void help(void);
 void pinout(void);
 int start(void);
