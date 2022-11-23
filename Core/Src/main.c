@@ -151,7 +151,6 @@ int main(void)
 					argc++;
 					token = strtok(NULL, " ");
 				}
-				//strcpy(argv[argc], cmdBuffer);
 
 				idx_cmd = 0;
 				newCmdReady = 1;
