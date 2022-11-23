@@ -93,7 +93,7 @@ int main(void)
 {
 	/* USER CODE BEGIN 1 */
 	char	 	cmdBuffer[CMD_BUFFER_SIZE];
-	int 		idx_cmd;
+	int 		idx_cmd = 0;
 	char* 		argv[MAX_ARGS];
 	int		 	argc = 0;
 	char*		token;
@@ -142,36 +142,38 @@ int main(void)
 			// Nouvelle ligne, instruction à traiter
 			case ASCII_CR: // Enter pressed
 				HAL_UART_Transmit(&huart2, newline, sizeof(newline), HAL_MAX_DELAY);
-				idx_cmd++;
 				cmdBuffer[idx_cmd] = '\0';
+				idx_cmd++;
 				argc = 0;
 				token = strtok(cmdBuffer, " ");
 				while(token!=NULL){
-					argv[argc++] = token;
+					argv[argc] = token;
+					argc++;
 					token = strtok(NULL, " ");
 				}
+				//strcpy(argv[argc], cmdBuffer);
 
 				idx_cmd = 0;
 				newCmdReady = 1;
 				break;
 				// Suppression du dernier caractère
 			case ASCII_DEL:
-				idx_cmd--;
 				cmdBuffer[idx_cmd] = '\0';
+				idx_cmd--;
 				HAL_UART_Transmit(&huart2, uartRxBuffer, UART_RX_BUFFER_SIZE, HAL_MAX_DELAY);
 				break;
 				// Nouveau caractère
 			default:
-				idx_cmd++;
 				cmdBuffer[idx_cmd] = uartRxBuffer[0];
+				idx_cmd++;
 				HAL_UART_Transmit(&huart2, uartRxBuffer, UART_RX_BUFFER_SIZE, HAL_MAX_DELAY);
 			}
 			uartRxReceived = 0;
 		}
 
 		if(newCmdReady){ ////////////////////////////////////////////////////
-			/*if(strcmp(argv[0],"set")==0){ // C'est pas un "== 1" plutôt?
-	  			  if(strcmp(argv[1],"PA5")==0){ // C'est pas un "== 1" plutôt?
+			/*if(strcmp(argv[0],"set")==0){
+	  			  if(strcmp(argv[1],"PA5")==0){
 	  				  HAL_GPIO_WritePin(GREEN_LED_GPIO_Port, GREEN_LED_Pin, atoi(argv[2]));
 	  				  sprintf(uartTxBuffer,"Switch on/off led : %d\r\n",atoi(argv[2]));
 	  				  HAL_UART_Transmit(&huart2, uartTxBuffer, 32, HAL_MAX_DELAY);
@@ -188,24 +190,24 @@ int main(void)
 	  			  HAL_UART_Transmit(&huart2, cmdNotFound, sizeof(cmdNotFound), HAL_MAX_DELAY);
 	  		  }*/
 
-			if(strcmp(argv[0],"help/r/n")==1){
+			if(strcmp(argv[0],"help")==0){
 				HAL_UART_Transmit(&huart2, helpMSG, 32, HAL_MAX_DELAY);
 				// Appel de la fonction "help"
 				help();
 			}
-			else if(strcmp(argv[0], "pinout")==1)
+			else if(strcmp(argv[0], "pinout")==0)
 			{
 				HAL_UART_Transmit(&huart2, pinoutMSG, 32, HAL_MAX_DELAY);
 				// Appel de la fonction "pinout"
 				pinout();
 			}
-			else if(strcmp(argv[0], "start")==1)
+			else if(strcmp(argv[0], "start")==0)
 			{
 				HAL_UART_Transmit(&huart2, powerOn, 32, HAL_MAX_DELAY);
 				// Appel de la fonction "start"
 				start();
 			}
-			else if(strcmp(argv[0], "stop")==1)
+			else if(strcmp(argv[0], "stop")==0)
 			{
 				HAL_UART_Transmit(&huart2, powerOff, 32, HAL_MAX_DELAY);
 				// Appel de la fonction "stop"
