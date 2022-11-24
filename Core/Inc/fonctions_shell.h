@@ -12,6 +12,9 @@
 #ifndef INC_FONCTIONS_SHELL_H_
 #define INC_FONCTIONS_SHELL_H_
 
+#define MOTEUR_ON 1
+#define MOTEUR_OFF 0
+
 #include "main.h"
 
 void help(void);

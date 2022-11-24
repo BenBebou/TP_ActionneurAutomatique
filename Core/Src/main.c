@@ -217,19 +217,16 @@ int main(void)
 
 			if(strcmp(argv[0],"help")==0){
 				HAL_UART_Transmit(&huart2, helpMSG, 32, HAL_MAX_DELAY);
-				// Appel de la fonction "help"
 				help();
 			}
 			else if(strcmp(argv[0], "pinout")==0)
 			{
 				HAL_UART_Transmit(&huart2, pinoutMSG, 32, HAL_MAX_DELAY);
-				// Appel de la fonction "pinout"
 				pinout();
 			}
 			else if(strcmp(argv[0], "start")==0)
 			{
 				HAL_UART_Transmit(&huart2, powerOn, 32, HAL_MAX_DELAY);
-				// Appel de la fonction "start"
 				start();
 			}
 			else if(strcmp(argv[0], "stop")==0)

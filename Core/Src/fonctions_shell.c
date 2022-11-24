@@ -14,6 +14,8 @@
 
 #define UART_TX_BUFFER_SIZE 64
 
+int EtatMoteur;
+
 extern UART_HandleTypeDef huart2;
 extern uint8_t uartTxBuffer[UART_TX_BUFFER_SIZE];
 
@@ -113,9 +115,16 @@ int start(){
 	 * \fn int start (void)
 	 * \brief Allume l'étage de puissance du moteur
 	 * \param void
-	 * \return void
+	 * \return int
+	 *
+	 * Commande le démarage du moteur via la "séquence d'allumage"
 	 */
-	// RIEN POUR LE MOMENT
+	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_3, GPIO_PIN_SET);
+	HAL_Delay(1000);
+	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_3, GPIO_PIN_RESET);
+
+	EtatMoteur = MOTEUR_ON;
+
 	return 0;
 }
 
@@ -124,8 +133,11 @@ int stop(){
 	 * \fn int stop (void)
 	 * \brief Eteint l'étage de puissance du moteur
 	 * \param void
-	 * \return void
+	 * \return int
 	 */
-	// RIEN POUR LE MOMENT
+	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_3, GPIO_PIN_RESET);
+
+	EtatMoteur = MOTEUR_OFF;
+
 	return 0;
 }
