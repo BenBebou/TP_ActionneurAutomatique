@@ -4,8 +4,8 @@
  * \file main.c
  * \brief Shell pour la commande d'un hacheur.
  * \author RUIZ Guilhem, HERBELIN Benjamin, LENOIR Adrien
- * \version 1
- * \date 28 Octobre 2022
+ * \version 2
+ * \date 24 Novembre 2022
  *
  * Shell de commande pour l'alimentation d'un moteur via un hacheur à commande complétaire décalée
  *

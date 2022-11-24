@@ -2,8 +2,8 @@
  * \file fonctions_shell.c
  * \brief Fichier contenant les fonctions appelées par main.c
  * \author RUIZ Guilhem, HERBELIN Benjamin, LENOIR Adrien
- * \version 1
- * \date 28 Octobre 2022
+ * \version 2
+ * \date 24 Novembre 2022
  *
  * Fichier contenant toutes les fonctions pouvant être appelées dans le shell
  *
