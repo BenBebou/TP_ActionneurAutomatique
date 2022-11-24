@@ -43,6 +43,10 @@
 #define ASCII_CR 0x0D
 // DEL = delete
 #define ASCII_DEL 0x7F
+
+// About PWMs
+#define PERIODE (TIM1->ARR) + 1
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -72,6 +76,11 @@ const uint8_t cmdNotFound[]="Command not found\r\n";
 uint32_t uartRxReceived;
 uint8_t uartRxBuffer[UART_RX_BUFFER_SIZE];
 uint8_t uartTxBuffer[UART_TX_BUFFER_SIZE];
+
+// About PWMs
+//float alpha = 0.6;
+//uint8_t periode = 1024;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -128,15 +137,17 @@ int main(void)
 
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
 	HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_1);
+
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
 	HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_2);
-	// Test : Réglages des alphas à 60 % : 0.6 * 1024 = 614
+	// Test : Réglages des alphas à 60 % : 0.6*PERIODE = 0.6 * 1024 = 614
 	__HAL_TIM_SetCompare(&htim1, TIM_CHANNEL_1, 614);
-	__HAL_TIM_SetCompare(&htim1, TIM_CHANNEL_2, 614);
+	__HAL_TIM_SetCompare(&htim1, TIM_CHANNEL_2, 410);
+
 
 	// Equivalences:
 	// CH1 : PA8 : T1 : Signal Jaune
-	// CH2 : PA9 : T4 : Signal Vert (En symbiose avec T1)
+	// CH2 : PA9 : T4 : Signal Vert (En symbiose avec T1, a décaler de T/2)
 	// CH1N : PA11 : T2 (Opposition à T1 sinon court-circuit) : Signal Bleu
 	// CH2N : PA12 : T3 (Opposition à T4 sinon court-circuit) : Signal Magenta
 
