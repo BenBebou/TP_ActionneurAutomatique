@@ -94,7 +94,7 @@ Dans cette partie, le but est de contrôler le hacheur avec le STM32. Nous utili
 Une fois que la STM32 est reliée au hacheur, le hacheur nous affiche des messages d’erreur par le biais des LEDs rouges. Ces messages d’erreurs s’activent parce que nous n’avons pas encore lancé la séquence de démarrage. Une fois que nous l’effectuons, les messages d’erreurs corrigés et les LEDs sur le hacheur deviennent jaunes. Ça indique que le hacheur fonctionne correctement. 
 De la même manière, on remarque que les LED “Blue-Bottom” et “Blue-Top” ainsi que “Red-Bottom” et “Red-Top” s’allument, affirmant le bon câblage du hacheur.
 
-<p align="center"><img src="images/cablage_hacheurs.png" width="800"></p>
+<p align="center"><img src="images/cablage_hacheurs.jpg" width="800"></p>
 <p align="center">Figure 7 : LED de vérification du fonctionnement du hacheur</p>
 
 Après avoir correctement câblé la MCC et le hacheur, nous nous sommes aperçu qu’il manquait les fonctions permettant de gérer le rapport cyclique et donc la vitesse de la MCC. Nous avons donc créé une fonction, disponible ci-dessous, comprenant deux cas : un pour baisser le rapport cyclique et l’autre pour l’augmenter.
