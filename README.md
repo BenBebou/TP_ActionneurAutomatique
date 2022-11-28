@@ -56,7 +56,7 @@ $DTG = 1100 1001 = 201$
 Pour obtenir un temps mort de $2\mu s$, il faut un DTG de 201.
 
 <p align="center">
-![temps mort ch1 ch1n(pa8_pa11)](https://user-images.githubusercontent.com/13495977/204361393-34d0c83a-00fe-4929-b742-cae07658b2f0.png)
+![img](https://github.com/BenBebou/TP_ActionneurAutomatique/tree/master/images/temps_mort_ch1_ch1n.png)
  </p>
  <p align="center">
  Figure 2 : Capture du temps mort
