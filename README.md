@@ -51,7 +51,7 @@ $DTG = 1100 1001 = 201$
 
 Pour obtenir un temps mort de $2\mu s$, il faut un DTG de 201.
 
-<p align="center"><img src="images/temps_mort_ch1_ch1n.png" width="650"></p>
+<p align="center"><img src="images/temps_mort_ch1_ch1n.png" width="700"></p>
 <p align="center">Figure 2 : Capture du temps mort</p>
 
 Sur l’oscilloscope, nous obtenons bien $2\mu s$ de temps mort. Nos calculs sont donc corrects.
@@ -60,7 +60,7 @@ PWM :
 
 Nous souhaitons créer une PWM complémentaire décalée pour contrôler notre hacheur et par conséquent notre moteur. Nous souhaitons que les transistors H1 et H4 soient fermés pendant que les transistors H2 et H3 sont ouverts. Pour reproduire ce pattern, il nous faut donc deux channels avec des PWM complémentaires.
 
-<p align="center"><img src="images/hacheur.png" width="650"></p>
+<p align="center"><img src="images/hacheur.png" width="450"></p>
 <p align="center">Figure 3 : Hacheurs 4 quadrants</p>
 
 Voici comment sont configurés nos channels sur CubeIDE : 
