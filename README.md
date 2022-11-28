@@ -68,7 +68,6 @@ PWM :
 
 Nous souhaitons créer une PWM complémentaire décalée pour contrôler notre hacheur et par conséquent notre moteur. Nous souhaitons que les transistors H1 et H4 soient fermés pendant que les transistors H2 et H3 sont ouverts. Pour reproduire ce pattern, il nous faut donc deux channels avec des PWM complémentaires.
 
-
 <p align="center">
 ![Capture d’écran 2022-11-28 à 20 16 51](https://user-images.githubusercontent.com/13495977/204363204-f6ffd410-dc39-4f00-b451-16704e94871d.png)
  </p>
@@ -102,16 +101,55 @@ Nous avons utilisé 4 sondes pour visualiser les allures des 4 PWM et un peu plu
 Ce qu’on voit sur la capture ci-dessus sont des PWM décalées avec un rapport cyclique de 60%. Pour les obtenir, nous avons défini le channel 1 à 60% et le channel 2 à 40% en utilisant les fonctions : 
 
 
-	__HAL_TIM_SetCompare(&htim1, TIM_CHANNEL_1, 614);
-	__HAL_TIM_SetCompare(&htim1, TIM_CHANNEL_2, 410);
+```c
+__HAL_TIM_SetCompare(&htim1, TIM_CHANNEL_1, 614);
+__HAL_TIM_SetCompare(&htim1, TIM_CHANNEL_2, 410);
+```
+
+### Hacheur et MCC
+
+Dans cette partie, le but est de contrôler le hacheur avec le STM32. Nous utilisons les phases “Bleue” et “Rouge”. Pour ce faire, il faut brancher la STM32 au connecteur 37 broches. En regardant la documentation, nous savons que les broches à connecter sont les suivantes : 
+
+<p align="center">
+
+ </p>
+ <p align="center">
+ Figure 6 : Documentation sur le connecteur 37 broches
+</p>
+
+Une fois que la STM32 est reliée au hacheur, le hacheur nous affiche des messages d’erreur par le biais des LEDs rouges. Ces messages d’erreurs s’activent parce que nous n’avons pas encore lancé la séquence de démarrage. Une fois que nous l’effectuons, les messages d’erreurs corrigés et les LEDs sur le hacheur deviennent jaunes. Ça indique que le hacheur fonctionne correctement. 
+De la même manière, on remarque que les LED “Blue-Bottom” et “Blue-Top” ainsi que “Red-Bottom” et “Red-Top” s’allument, affirmant le bon câblage du hacheur.
+
+<p align="center">
+
+ </p>
+ <p align="center">
+ Figure 7 : LED de vérification du fonctionnement du hacheur
+</p>
+
+Après avoir correctement câblé la MCC et le hacheur, nous nous sommes aperçu qu’il manquait les fonctions permettant de gérer le rapport cyclique et donc la vitesse de la MCC. Nous avons donc créé une fonction, disponible ci-dessous, comprenant deux cas : un pour baisser le rapport cyclique et l’autre pour l’augmenter.
+
+### Le bouton EXTI
 
 
+* Réaliser la séquence d'allumage sur une GPIO quelconque
 
+La séquence d’allumage consiste à passer la broche adéquate (PC3) du driver moteur durant une seconde à l’état haut, ce qui se fait directement en modifiant l’état d’un GPIO (en output) via la fonction `AL_GPIO_WritePin(GPIOX, GPIO_PIN_x, GPIO_PIN_SET*)`.
 
+\* Puis `GPIO_PIN_RESET`, le cas échéant.
 
+* Commander cette séquence d'allumage de 2 façons :
 
+Deux fonctions sont codées dans le fichier fonctions_shell.c : `start()` et `stop()`. La fonction `start()` lance simplement la séquence d’allumage (voir plus haut). La fonction `stop()` ne fait rien pour le moment.
 
+* Sur l'appui du bouton bleu de la carte avec une gestion d'interruption lors de l'appui sur le bouton bleu (EXTI).
+En passant par un flag indiquant l’état courant du moteur (allumé/éteint), il n’y a qu’à faire basculer l’alimentation du hacheur (via les fonctions `start()`/`stop()`) vers l’état opposé à chaque entrée dans l’interruption EXTI3.
 
+* Sur la réception en uart de la commande "start".
+
+Via l’appel par le shell, il suffit de rajouter deux cas dans le if/else if/else. Ceux-ci appellent les mêmes fonctions que le bouton bleu, les fonctions `start()` et `stop()`.
+
+Pour renseigner le rapport cyclique alpha désiré, puisque le ARR du timer employé est choisi à 1024, il suffit d’attribuer la bonne valeur au registre `TIM1->CCR`, par exemple en employant la fonction `__HAL_TIM_SetCompare(&htimx, TIM_CHANNEL_x, value)`,  où value est donné par `(int)alpha*ARR`, soit `(int)alpha*1024` ici.
 
 ## Avancements
 
