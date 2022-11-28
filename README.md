@@ -15,6 +15,29 @@ Pour ce faire, plusieurs réalisations intermédiaires sont à implémenter:
 * Réalisation de l'asservissement, via capteurs et boucle de traitements logiciels sur l'intensité électrique consommée et la vitesse de rotation du rotor.
 * (Documentation du tout avec l'outil Doxygen)
 
+
+## En séance 
+
+### Le Shell
+
+### PWM complémentaire décalée - STM32
+
+Les temps morts : 
+
+Nous souhaitons un dead-time de 2us avec une résolution à 10 bits. Pour obtenir ce résultat, il faut réaliser quelques calculs préliminaires. Une résolution à 10 bits signifie que nous avons un ARR avec une valeur de 1024.
+
+$\sum_{n=1}^{10} n^2$
+
+
+
+
+
+
+
+
+
+
+
 ## Avancements
 
 * Le shell est codé et implémente les fonctions basique *help*, *pinout*, *start* et *stop*, où :
