@@ -51,7 +51,7 @@ $DTG = 1100 1001 = 201$
 
 Pour obtenir un temps mort de $2\mu s$, il faut un DTG de 201.
 
-<p align="center"><img src="images/temps_mort_ch1_ch1n.png" width="700"></p>
+<p align="center"><img src="images/temps_mort_ch1_ch1n.png" width="750"></p>
 <p align="center">Figure 2 : Capture du temps mort</p>
 
 Sur l’oscilloscope, nous obtenons bien $2\mu s$ de temps mort. Nos calculs sont donc corrects.
@@ -60,19 +60,19 @@ PWM :
 
 Nous souhaitons créer une PWM complémentaire décalée pour contrôler notre hacheur et par conséquent notre moteur. Nous souhaitons que les transistors H1 et H4 soient fermés pendant que les transistors H2 et H3 sont ouverts. Pour reproduire ce pattern, il nous faut donc deux channels avec des PWM complémentaires.
 
-<p align="center"><img src="images/hacheur.png" width="450"></p>
+<p align="center"><img src="images/hacheur.png" width="400"></p>
 <p align="center">Figure 3 : Hacheurs 4 quadrants</p>
 
 Voici comment sont configurés nos channels sur CubeIDE : 
 
-<p align="center"><img src="images/config_channels.png" width="650"></p>
+<p align="center"><img src="images/config_channels.png" width="500"></p>
 <p align="center">Figure 4 : Configuration des channels 1 et 2 du timer 1</p>
 
 Les PWM des channels 1 et 2 sont respectivement branchées sur les broches PA8 et PA11 ainsi que PA9 et PA12. 
 
 Nous avons utilisé 4 sondes pour visualiser les allures des 4 PWM et un peu plus tard dans les TP, nous avons aussi utilisé une sonde numérique pour les visualiser. Voici ce que nous obtenons :
 
-<p align="center"><img src="images/signaux_complementaires_decalees.png" width="800"></p>
+<p align="center"><img src="images/signaux_complementaires_decalees.png" width="750"></p>
 <p align="center">Figure 5 : Allure des PWM complémentaire décalées</p>
 <p align="center">(Jaune : CH1, Violet : CH1N et Bleu : CH2, Vert :CH2N)</p>
 
