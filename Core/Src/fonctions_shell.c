@@ -2,8 +2,8 @@
  * \file fonctions_shell.c
  * \brief Fichier contenant les fonctions appelées par main.c
  * \author RUIZ Guilhem, HERBELIN Benjamin, LENOIR Adrien
- * \version 2
- * \date 24 Novembre 2022
+ * \version 3
+ * \date Dernière modification : 28 Novembre 2022
  *
  * Fichier contenant toutes les fonctions pouvant être appelées dans le shell
  *
@@ -132,7 +132,7 @@ int start(){
 int stop(){
 	/**
 	 * \fn int stop (void)
-	 * \brief Eteint l'étage de puissance du moteur
+	 * \brief Eteint l'étage de puissance du moteur (ne fait rien pour le moment)
 	 * \param void
 	 * \return int
 	 */
@@ -145,10 +145,13 @@ int stop(){
 
 int alpha(int alphaInit, int alphaFin) {
 	/**
-	 * \fn int alpha(int, int)
+	 * \fn int alpha(int alphaInit, int alphaFin)
 	 * \brief La fonction permet de changer le rapport cyclique progressivement
 	 * \param int alphaInit, int alphaFin
 	 * \return int
+	 *
+	 * Cette fonction permet de faire varier le rapport cyclique (donné par alphaXxx/1024) de "alphaInit" à "alphaFin",
+	 * à une cadence d'environs 10 % (soit 100 cycles) par seconde (chaque cycle mesure de 10 ms+).
 	 */
 	int alphaActu = 0;
 	if (alphaInit <= alphaFin) {
@@ -158,7 +161,7 @@ int alpha(int alphaInit, int alphaFin) {
 			TIM1->CCR2=(1024-alphaActu);
 			HAL_UART_Transmit(&huart2, alphaActu, sizeof(alphaActu), HAL_MAX_DELAY);
 			alphaActu++;
-			HAL_Delay(100);
+			HAL_Delay(10);
 		}
 
 	}

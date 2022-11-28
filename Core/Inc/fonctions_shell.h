@@ -3,7 +3,7 @@
  * \brief Header du fichier contenant les fonctions appelées par main.c
  * \author RUIZ Guilhem, HERBELIN Benjamin, LENOIR Adrien
  * \version 2
- * \date 24 Novembre 2022
+ * \date Dernière modification : 28 Novembre 2022
  *
  * Fichier header de fonctions_shell.c, qui contient toutes les fonctions pouvant être appelées dans le shell
  *

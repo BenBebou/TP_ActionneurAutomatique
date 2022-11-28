@@ -7,6 +7,7 @@
 #include "stm32g4xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <stdio.h>
 #include "fonctions_shell.h"
 /* USER CODE END Includes */
 
@@ -200,7 +201,7 @@ void EXTI3_IRQHandler(void)
 		stop();
 	}
 	else {
-		printf("Unexpected value");
+		printf("Unexpected value\r\n");
 	}
 	/* USER CODE END EXTI3_IRQn 0 */
 	HAL_GPIO_EXTI_IRQHandler(GPIO_ISO_Pin);

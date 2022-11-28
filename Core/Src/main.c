@@ -5,8 +5,8 @@
  * \file main.c
  * \brief Shell pour la commande d'un hacheur.
  * \author RUIZ Guilhem, HERBELIN Benjamin, LENOIR Adrien
- * \version 2
- * \date 24 Novembre 2022
+ * \version 3
+ * \date Dernière modification : 28 Novembre 2022
  *
  * Shell de commande pour l'alimentation d'un moteur via un hacheur à commande complétaire décalée
  *
@@ -148,10 +148,6 @@ int main(void)
 
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
 	HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_2);
-	// Test : Réglages des alphas à 60 % : 0.6*PERIODE = 0.6 * 1024 = 614
-	__HAL_TIM_SetCompare(&htim1, TIM_CHANNEL_1, 614);
-	__HAL_TIM_SetCompare(&htim1, TIM_CHANNEL_2, 410);
-
 
 	// Equivalences:
 	// CH1 : PA8 : T1 : Signal Jaune
