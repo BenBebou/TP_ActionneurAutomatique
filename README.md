@@ -31,7 +31,7 @@ $DT = 2 \mu s$
 
 Grâce à la documentation qui nous est donné dans le cours, nous pouvons déterminer le Dead Time : 
 
-<p align="center"><img src="images/formule_dtg.png"></p>
+<p align="center"><img src="images/formule_dtg.png" width="500"></p>
 <p align="center">Figure 1 : Formule pour obtenir le Dead Time</p>
 
 On sait que : 
