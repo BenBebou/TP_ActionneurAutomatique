@@ -21,5 +21,6 @@ void help(void);
 void pinout(void);
 int start(void);
 int stop(void);
+int alpha(int rapport_cyclique_initial, int rapport_cyclique);
 
 #endif /* INC_FONCTIONS_SHELL_H_ */

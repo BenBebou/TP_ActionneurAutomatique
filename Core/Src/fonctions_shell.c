@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include "fonctions_shell.h"
+#include "tim.h"
 
 #define UART_TX_BUFFER_SIZE 64
 
@@ -120,7 +121,7 @@ int start(){
 	 * Commande le démarage du moteur via la "séquence d'allumage"
 	 */
 	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_3, GPIO_PIN_SET);
-	HAL_Delay(1000);
+	HAL_Delay(1);
 	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_3, GPIO_PIN_RESET);
 
 	EtatMoteur = MOTEUR_ON;
@@ -135,9 +136,41 @@ int stop(){
 	 * \param void
 	 * \return int
 	 */
-	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_3, GPIO_PIN_RESET);
-
+	//HAL_GPIO_WritePin(GPIOC, GPIO_PIN_3, GPIO_PIN_RESET);
+	//TIM_Cmd(TIM1, DISABLE);
 	EtatMoteur = MOTEUR_OFF;
 
 	return 0;
+}
+
+int alpha(int alphaInit, int alphaFin) {
+	/**
+	 * \fn int alpha(int, int)
+	 * \brief La fonction permet de changer le rapport cyclique progressivement
+	 * \param int alphaInit, int alphaFin
+	 * \return int
+	 */
+	int alphaActu = 0;
+	if (alphaInit <= alphaFin) {
+		alphaActu = alphaInit;
+		while (alphaActu <= alphaFin) {
+			TIM1->CCR1=alphaActu;
+			TIM1->CCR2=(1024-alphaActu);
+			HAL_UART_Transmit(&huart2, alphaActu, sizeof(alphaActu), HAL_MAX_DELAY);
+			alphaActu++;
+			HAL_Delay(100);
+		}
+
+	}
+	else if(alphaFin < alphaInit) {
+		alphaActu = alphaFin;
+		while (alphaActu >= alphaFin) {
+			TIM1->CCR1=alphaActu;
+			TIM1->CCR2=(1024-alphaActu);
+			HAL_UART_Transmit(&huart2, alphaActu, sizeof(alphaActu), HAL_MAX_DELAY);
+			alphaActu--;
+			HAL_Delay(100);
+		}
+	}
+	return alphaActu;
 }
