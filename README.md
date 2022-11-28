@@ -126,8 +126,8 @@ Pour renseigner le rapport cyclique alpha désiré, puisque le ARR du timer empl
 * Le shell est codé et implémente les fonctions basique *help*, *pinout*, *start* et *stop*, où :
   * *help* renvoit le nom des trois autre commandes disponibles, ainsi que leur utilité
   * *pinout* renvoit la liste des broches du microcontrôleur utilisées, ainsi que leur rôle/assignation
-  * *start*, qui ne fait rien pour le moment
+  * *start*, envoit la séquence d'initialisation du hacheur
   * *stop*, qui ne fait rien pour le moment
 * Les broches concernées sont activées et assignées aux bons protocoles
-* Fonctions de commandes codées : NON
-* Asservissement réalisé : NON
+* La fonction de commande `alpha()` permettant de choisir un rapport cyclique et de changer le rapport actuel vers celui-ci en douceur
+* L'Asservissement n'a pas encore été réalisé
