@@ -31,12 +31,8 @@ $DT = 2 \mu s$
 
 Grâce à la documentation qui nous est donné dans le cours, nous pouvons déterminer le Dead Time : 
 
-<p align="center">
-![Capture d’écran 2022-11-28 à 20 03 24](https://user-images.githubusercontent.com/13495977/204360288-8f8b9956-45b2-4e01-a9e8-d4154b585226.png)
- </p>
- <p align="center">
- Figure 1 : Formule pour obtenir le Dead Time
-</p>
+<p align="center"><img src="Images/formule_dtg.png"></p>
+<p align="center">Figure 1 : Formule pour obtenir le Dead Time</p>
 
 On sait que : 
 
