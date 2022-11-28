@@ -51,12 +51,8 @@ $DTG = 1100 1001 = 201$
 
 Pour obtenir un temps mort de $2\mu s$, il faut un DTG de 201.
 
-<p align="center">
-![img](https://github.com/BenBebou/TP_ActionneurAutomatique/tree/master/images/temps_mort_ch1_ch1n.png)
- </p>
- <p align="center">
- Figure 2 : Capture du temps mort
-</p>
+<p align="center"><img src="images/temps_mort_ch1_ch1n.png" width="650"></p>
+<p align="center">Figure 2 : Capture du temps mort</p>
 
 Sur l’oscilloscope, nous obtenons bien $2\mu s$ de temps mort. Nos calculs sont donc corrects.
 
@@ -64,35 +60,21 @@ PWM :
 
 Nous souhaitons créer une PWM complémentaire décalée pour contrôler notre hacheur et par conséquent notre moteur. Nous souhaitons que les transistors H1 et H4 soient fermés pendant que les transistors H2 et H3 sont ouverts. Pour reproduire ce pattern, il nous faut donc deux channels avec des PWM complémentaires.
 
-<p align="center">
-![Capture d’écran 2022-11-28 à 20 16 51](https://user-images.githubusercontent.com/13495977/204363204-f6ffd410-dc39-4f00-b451-16704e94871d.png)
- </p>
- <p align="center">
- Figure 3 : Hacheurs 4 quadrants
-</p>
+<p align="center"><img src="images/hacheur.png" width="650"></p>
+<p align="center">Figure 3 : Hacheurs 4 quadrants</p>
 
 Voici comment sont configurés nos channels sur CubeIDE : 
 
-<p align="center">
-![image](https://user-images.githubusercontent.com/13495977/204362252-9e97d016-3a70-4e0e-9d4f-19d24a32d19c.png)
- </p>
- <p align="center">
- Figure 4 : Configuration des channels 1 et 2 du timer 1
-</p>
+<p align="center"><img src="images/config_channels.png" width="650"></p>
+<p align="center">Figure 4 : Configuration des channels 1 et 2 du timer 1</p>
 
 Les PWM des channels 1 et 2 sont respectivement branchées sur les broches PA8 et PA11 ainsi que PA9 et PA12. 
 
 Nous avons utilisé 4 sondes pour visualiser les allures des 4 PWM et un peu plus tard dans les TP, nous avons aussi utilisé une sonde numérique pour les visualiser. Voici ce que nous obtenons :
 
-<p align="center">
-![image](https://user-images.githubusercontent.com/13495977/204362252-9e97d016-3a70-4e0e-9d4f-19d24a32d19c.png)
- </p>
- <p align="center">
- Figure 5 : Allure des PWM complémentaire décalées 
- </p>
-  <p align="center">
-(Jaune : CH1, Violet : CH1N et Bleu : CH2, Vert :CH2N)
-</p>
+<p align="center"><img src="images/signaux_complementaires_decalees.png" width="800"></p>
+<p align="center">Figure 5 : Allure des PWM complémentaire décalées</p>
+<p align="center">(Jaune : CH1, Violet : CH1N et Bleu : CH2, Vert :CH2N)</p>
 
 Ce qu’on voit sur la capture ci-dessus sont des PWM décalées avec un rapport cyclique de 60%. Pour les obtenir, nous avons défini le channel 1 à 60% et le channel 2 à 40% en utilisant les fonctions : 
 
@@ -106,22 +88,14 @@ __HAL_TIM_SetCompare(&htim1, TIM_CHANNEL_2, 410);
 
 Dans cette partie, le but est de contrôler le hacheur avec le STM32. Nous utilisons les phases “Bleue” et “Rouge”. Pour ce faire, il faut brancher la STM32 au connecteur 37 broches. En regardant la documentation, nous savons que les broches à connecter sont les suivantes : 
 
-<p align="center">
-
- </p>
- <p align="center">
- Figure 6 : Documentation sur le connecteur 37 broches
-</p>
+<p align="center"><img src="images/doc_connecteur.png" width="800"></p>
+<p align="center">Figure 6 : Documentation sur le connecteur 37 broches</p>
 
 Une fois que la STM32 est reliée au hacheur, le hacheur nous affiche des messages d’erreur par le biais des LEDs rouges. Ces messages d’erreurs s’activent parce que nous n’avons pas encore lancé la séquence de démarrage. Une fois que nous l’effectuons, les messages d’erreurs corrigés et les LEDs sur le hacheur deviennent jaunes. Ça indique que le hacheur fonctionne correctement. 
 De la même manière, on remarque que les LED “Blue-Bottom” et “Blue-Top” ainsi que “Red-Bottom” et “Red-Top” s’allument, affirmant le bon câblage du hacheur.
 
-<p align="center">
-
- </p>
- <p align="center">
- Figure 7 : LED de vérification du fonctionnement du hacheur
-</p>
+<p align="center"><img src="images/cablage_hacheurs.png" width="800"></p>
+<p align="center">Figure 7 : LED de vérification du fonctionnement du hacheur</p>
 
 Après avoir correctement câblé la MCC et le hacheur, nous nous sommes aperçu qu’il manquait les fonctions permettant de gérer le rapport cyclique et donc la vitesse de la MCC. Nous avons donc créé une fonction, disponible ci-dessous, comprenant deux cas : un pour baisser le rapport cyclique et l’autre pour l’augmenter.
 
