@@ -121,7 +121,7 @@ Via l’appel par le shell, il suffit de rajouter deux cas dans le `if ... else 
 Pour renseigner le rapport cyclique $\alpha$ désiré, puisque le ARR du timer employé est choisi à 1024, il suffit d’attribuer la bonne valeur au registre `TIM1->CCR`, par exemple en employant la fonction `__HAL_TIM_SetCompare(&htimx, TIM_CHANNEL_x, value)`,  où value est donné par `(int)alpha*ARR`, soit `(int)alpha*1024` ici.
 
 #### Résolution des temps de traitement/contexte mécanique
-Lors du passage entre deux commandes de rapport cyclique sensiblement différent, on remarque que le moteur peine à suivre le rythme, c’est parce que celui-ci a beaucoup d’inertie. Afin de rendre plus viable le changement d’un rapport cyclique à un autre, on doit donc mettre au point une méthode de passage progressif. Cette méthode se nomme ```c alpha()``` dans notre cas, et elle prend en paramètres une expression des rapports cycliques initiaux et finaux sur une échelle de 1024.
+Lors du passage entre deux commandes de rapport cyclique sensiblement différent, on remarque que le moteur peine à suivre le rythme, c’est parce que celui-ci a beaucoup d’inertie. Afin de rendre plus viable le changement d’un rapport cyclique à un autre, on doit donc mettre au point une méthode de passage progressif. Cette méthode se nomme `alpha()` dans notre cas, et elle prend en paramètres une expression des rapports cycliques initiaux et finaux sur une échelle de 1024.
 
 ## Avancements
 
