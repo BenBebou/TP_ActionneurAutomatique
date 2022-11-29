@@ -122,9 +122,9 @@ Pour renseigner le rapport cyclique $\alpha$ désiré, puisque le ARR du timer e
 
 #### Résolution des temps de traitement/contexte mécanique
 Lors du passage entre deux commandes de rapport cyclique sensiblement différent, on remarque que le moteur peine à suivre le rythme, c’est parce que celui-ci a beaucoup d’inertie. Afin de rendre plus viable le changement d’un rapport cyclique à un autre, on doit donc mettre au point une méthode de passage progressif. Cette méthode se nomme
-`c
+```c
 alpha()
-`
+```
 dans notre cas, et elle prend en paramètres une expression des rapports cycliques initiaux et finaux sur une échelle de 1024.
 
 ## Avancements
