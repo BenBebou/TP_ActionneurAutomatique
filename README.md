@@ -102,24 +102,26 @@ Après avoir correctement câblé la MCC et le hacheur, nous nous sommes aperçu
 ### Le bouton EXTI
 
 
-* Réaliser la séquence d'allumage sur une GPIO quelconque
-
-La séquence d’allumage consiste à passer la broche adéquate (PC3) du driver moteur durant une seconde à l’état haut, ce qui se fait directement en modifiant l’état d’un GPIO (en output) via la fonction `AL_GPIO_WritePin(GPIOX, GPIO_PIN_x, GPIO_PIN_SET*)`.
+#### Réaliser la séquence d'allumage sur une GPIO quelconque
+La séquence d’allumage consiste à passer la broche adéquate (PC3) du driver moteur durant une faible durée (#qq µs) à l’état haut, ce qui se fait directement en modifiant l’état d’un GPIO (en output) via la fonction `HAL_GPIO_WritePin(GPIOX, GPIO_PIN_x, GPIO_PIN_SET)`\*.
 
 \* Puis `GPIO_PIN_RESET`, le cas échéant.
 
-* Commander cette séquence d'allumage de 2 façons :
+#### Commander cette séquence d'allumage de 2 façons
 
 Deux fonctions sont codées dans le fichier fonctions_shell.c : `start()` et `stop()`. La fonction `start()` lance simplement la séquence d’allumage (voir plus haut). La fonction `stop()` ne fait rien pour le moment.
 
-* Sur l'appui du bouton bleu de la carte avec une gestion d'interruption lors de l'appui sur le bouton bleu (EXTI).
-En passant par un flag indiquant l’état courant du moteur (allumé/éteint), il n’y a qu’à faire basculer l’alimentation du hacheur (via les fonctions `start()`/`stop()`) vers l’état opposé à chaque entrée dans l’interruption EXTI3.
+##### Sur l'appui du bouton bleu de la carte avec une gestion d'interruption lors de l'appui sur le bouton bleu (EXTI)
+En passant par un flag indiquant l’état courant du moteur (allumé/éteint), il n’y a qu’à faire basculer l’alimentation du hacheur (via les fonctions `start()`/`stop()`) vers l’état opposé à chaque activation de l’interruption EXTI3.
 
-* Sur la réception en uart de la commande "start".
+##### Sur la réception en uart de la commande `start()`
 
-Via l’appel par le shell, il suffit de rajouter deux cas dans le if/else if/else. Ceux-ci appellent les mêmes fonctions que le bouton bleu, les fonctions `start()` et `stop()`.
+Via l’appel par le shell, il suffit de rajouter deux cas dans le `if ... else if ... else`. Ceux-ci appellent les mêmes fonctions que le bouton bleu, les fonctions `start()` et `stop()`.
 
-Pour renseigner le rapport cyclique alpha désiré, puisque le ARR du timer employé est choisi à 1024, il suffit d’attribuer la bonne valeur au registre `TIM1->CCR`, par exemple en employant la fonction `__HAL_TIM_SetCompare(&htimx, TIM_CHANNEL_x, value)`,  où value est donné par `(int)alpha*ARR`, soit `(int)alpha*1024` ici.
+Pour renseigner le rapport cyclique $\alpha$ désiré, puisque le ARR du timer employé est choisi à 1024, il suffit d’attribuer la bonne valeur au registre `TIM1->CCR`, par exemple en employant la fonction `__HAL_TIM_SetCompare(&htimx, TIM_CHANNEL_x, value)`,  où value est donné par `(int)alpha*ARR`, soit `(int)alpha*1024` ici.
+
+#### Résolution des temps de traitement/contexte mécanique
+Lors du passage entre deux commandes de rapport cyclique sensiblement différent, on remarque que le moteur peine à suivre le rythme, c’est parce que celui-ci a beaucoup d’inertie. Afin de rendre plus viable le changement d’un rapport cyclique à un autre, on doit donc mettre au point une méthode de passage progressif. Cette méthode se nomme “alpha()” dans notre cas, et elle prend en paramètres une expression des rapports cycliques initiaux et finaux sur une échelle de 1024.
 
 ## Avancements
 
