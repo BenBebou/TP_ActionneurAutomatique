@@ -15,6 +15,16 @@ Pour ce faire, plusieurs réalisations intermédiaires sont à implémenter:
 * Réalisation de l'asservissement, via capteurs et boucle de traitements logiciels sur l'intensité électrique consommée et la vitesse de rotation du rotor.
 * (Documentation du tout avec l'outil Doxygen)
 
+## Avancements en bref
+
+* Le shell est codé et implémente les fonctions basique *help*, *pinout*, *start* et *stop*, où :
+  * *help* renvoit le nom des trois autre commandes disponibles, ainsi que leur utilité
+  * *pinout* renvoit la liste des broches du microcontrôleur utilisées, ainsi que leur rôle/assignation
+  * *start*, envoit la séquence d'initialisation du hacheur
+  * *stop*, qui ne fait rien pour le moment
+* Les broches concernées sont activées et assignées aux bons protocoles
+* La fonction de commande `alpha()` permettant de choisir un rapport cyclique et de changer le rapport actuel vers celui-ci en douceur
+* L'Asservissement n'a pas encore été réalisé
 
 ## En séance 
 
@@ -116,20 +126,9 @@ En passant par un flag indiquant l’état courant du moteur (allumé/éteint), 
 
 ##### Sur la réception en uart de la commande `start()`
 
-Via l’appel par le shell, il suffit de rajouter deux cas dans le `if() ... else if() ... else`. Ceux-ci appellent les mêmes fonctions que le bouton bleu, les fonctions `start()` et `stop()`.
+Via l’appel par le shell, il suffit de rajouter deux cas dans le branchement `if() ... else if() ... else`. Ceux-ci appellent les mêmes fonctions que le bouton bleu, les fonctions `start()` et `stop()`.
 
 Pour renseigner le rapport cyclique $\alpha$ désiré, puisque le ARR du timer employé est choisi à 1024, il suffit d’attribuer la bonne valeur au registre `TIM1->CCR`, par exemple en employant la fonction `__HAL_TIM_SetCompare(&htimx, TIM_CHANNEL_x, value)`,  où value est donné par `(int)alpha*ARR`, soit `(int)alpha*1024` ici.
 
 #### Résolution des temps de traitement/contexte mécanique
 Lors du passage entre deux commandes de rapport cyclique sensiblement différent, on remarque que le moteur peine à suivre le rythme, c’est parce que celui-ci a beaucoup d’inertie. Afin de rendre plus viable le changement d’un rapport cyclique à un autre, on doit donc mettre au point une méthode de passage progressif. Cette méthode se nomme `alpha()` dans notre cas, et elle prend en paramètres une expression des rapports cycliques initiaux et finaux sur une échelle de 1024 (voir [fonctions_shell.c](Core/Src/fonctions_shell.c#146)).
-
-## Avancements
-
-* Le shell est codé et implémente les fonctions basique *help*, *pinout*, *start* et *stop*, où :
-  * *help* renvoit le nom des trois autre commandes disponibles, ainsi que leur utilité
-  * *pinout* renvoit la liste des broches du microcontrôleur utilisées, ainsi que leur rôle/assignation
-  * *start*, envoit la séquence d'initialisation du hacheur
-  * *stop*, qui ne fait rien pour le moment
-* Les broches concernées sont activées et assignées aux bons protocoles
-* La fonction de commande `alpha()` permettant de choisir un rapport cyclique et de changer le rapport actuel vers celui-ci en douceur
-* L'Asservissement n'a pas encore été réalisé
