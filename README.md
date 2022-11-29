@@ -112,7 +112,7 @@ La séquence d’allumage consiste à passer la broche adéquate (PC3) du driver
 Deux fonctions sont codées dans le fichier fonctions_shell.c : `start()` et `stop()`. La fonction `start()` lance simplement la séquence d’allumage (voir plus haut). La fonction `stop()` ne fait rien pour le moment.
 
 ##### Sur l'appui du bouton bleu de la carte avec une gestion d'interruption lors de l'appui sur le bouton bleu (EXTI)
-En passant par un flag indiquant l’état courant du moteur (allumé/éteint), il n’y a qu’à faire basculer l’alimentation du hacheur (via les fonctions `start()`/`stop()`) vers l’état opposé à chaque activation de l’interruption EXTI3 (voir [stm32g4xx_it.c](Core/Src/stm32g4xx_it.c) ligne 193).
+En passant par un flag indiquant l’état courant du moteur (allumé/éteint), il n’y a qu’à faire basculer l’alimentation du hacheur (via les fonctions `start()`/`stop()`) vers l’état opposé à chaque activation de l’interruption EXTI3 (voir [stm32g4xx_it.c](Core/Src/stm32g4xx_it.c#L193) ligne 193).
 
 ##### Sur la réception en uart de la commande `start()`
 
