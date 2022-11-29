@@ -116,7 +116,7 @@ En passant par un flag indiquant l’état courant du moteur (allumé/éteint), 
 
 ##### Sur la réception en uart de la commande `start()`
 
-Via l’appel par le shell, il suffit de rajouter deux cas dans le `if ... else if ... else`. Ceux-ci appellent les mêmes fonctions que le bouton bleu, les fonctions `start()` et `stop()`.
+Via l’appel par le shell, il suffit de rajouter deux cas dans le `if() ... else if() ... else`. Ceux-ci appellent les mêmes fonctions que le bouton bleu, les fonctions `start()` et `stop()`.
 
 Pour renseigner le rapport cyclique $\alpha$ désiré, puisque le ARR du timer employé est choisi à 1024, il suffit d’attribuer la bonne valeur au registre `TIM1->CCR`, par exemple en employant la fonction `__HAL_TIM_SetCompare(&htimx, TIM_CHANNEL_x, value)`,  où value est donné par `(int)alpha*ARR`, soit `(int)alpha*1024` ici.
 
