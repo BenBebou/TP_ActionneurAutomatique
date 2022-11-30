@@ -18,9 +18,9 @@ Pour ce faire, plusieurs réalisations intermédiaires sont à implémenter:
 ## Avancements en bref
 
 * Le shell est codé et implémente les fonctions basique *help*, *pinout*, *start* et *stop*, où :
-  * *help* renvoit le nom des trois autre commandes disponibles, ainsi que leur utilité
-  * *pinout* renvoit la liste des broches du microcontrôleur utilisées, ainsi que leur rôle/assignation
-  * *start*, envoit la séquence d'initialisation du hacheur
+  * *help* renvoie le nom des trois autre commandes disponibles, ainsi que leur utilité
+  * *pinout* renvoie la liste des broches du microcontrôleur utilisées, ainsi que leur rôle/assignation
+  * *start*, envoie la séquence d'initialisation du hacheur
   * *stop*, qui ne fait rien pour le moment
 * Les broches concernées sont activées et assignées aux bons protocoles
 * La fonction de commande `alpha()` permettant de choisir un rapport cyclique et de changer le rapport actuel vers celui-ci en douceur
@@ -32,11 +32,12 @@ Pour ce faire, plusieurs réalisations intermédiaires sont à implémenter:
 
 ### PWM complémentaire décalée - STM32
 
-Les temps morts : 
+**Les temps morts :** 
 
-Nous souhaitons un dead-time de 2us avec une résolution à 10 bits. Pour obtenir ce résultat, il faut réaliser quelques calculs préliminaires. Une résolution à 10 bits signifie que nous avons un ARR avec une valeur de 1024.
+Nous souhaitons un Dead Time de 2us avec une résolution à 10 bits. Pour obtenir ce résultat, il faut réaliser quelques calculs préliminaires. Une résolution à 10 bits signifie que nous avons un ARR avec une valeur de 1024.
 
 $F_{clk} = 164MHz \Rightarrow  T_{clk} = 6{,}1ns$
+  
 $DT = 2 \mu s$
 
 Grâce à la documentation qui nous est donné dans le cours, nous pouvons déterminer le Dead Time : 
@@ -59,14 +60,14 @@ Donc :
 
 $DTG = 1100 1001 = 201$
 
-Pour obtenir un temps mort de $2\mu s$, il faut un DTG de 201.
+Pour obtenir un temps mort de $2\mu s$, il faut un $DTG$ de 201.
 
 <p align="center"><img src="images/temps_mort_ch1_ch1n.png" width="750"></p>
 <p align="center">Figure 2 : Capture du temps mort</p>
 
 Sur l’oscilloscope, nous obtenons bien $2\mu s$ de temps mort. Nos calculs sont donc corrects.
 
-PWM :
+**PWM :**
 
 Nous souhaitons créer une PWM complémentaire décalée pour contrôler notre hacheur et par conséquent notre moteur. Nous souhaitons que les transistors H1 et H4 soient fermés pendant que les transistors H2 et H3 sont ouverts. Pour reproduire ce pattern, il nous faut donc deux channels avec des PWM complémentaires.
 
@@ -83,8 +84,7 @@ Les PWM des channels 1 et 2 sont respectivement branchées sur les broches PA8 e
 Nous avons utilisé 4 sondes pour visualiser les allures des 4 PWM et un peu plus tard dans les TP, nous avons aussi utilisé une sonde numérique pour les visualiser. Voici ce que nous obtenons :
 
 <p align="center"><img src="images/signaux_complementaires_decalees.png" width="750"></p>
-<p align="center">Figure 5 : Allure des PWM complémentaire décalées</p>
-<p align="center">(Jaune : CH1, Violet : CH1N et Bleu : CH2, Vert :CH2N)</p>
+<p align="center">Figure 5 : Allure des PWM complémentaire décalées (Jaune : CH1, Violet : CH1N et Bleu : CH2, Vert : CH2N)</p>
 
 Ce qu’on voit sur la capture ci-dessus sont des PWM décalées avec un rapport cyclique de 60%. Pour les obtenir, nous avons défini le channel 1 à 60% et le channel 2 à 40% en utilisant les fonctions : 
 
@@ -119,7 +119,7 @@ La séquence d’allumage consiste à passer la broche adéquate (PC3) du driver
 
 #### Commander cette séquence d'allumage de 2 façons
 
-Deux fonctions sont codées dans le fichier fonctions_shell.c : `start()` et `stop()`. La fonction `start()` lance simplement la séquence d’allumage (voir plus haut). La fonction `stop()` ne fait rien pour le moment.
+Deux fonctions sont codées dans le fichier `fonctions_shell.c` : `start()` et `stop()`. La fonction `start()` lance simplement la séquence d’allumage (voir plus haut). La fonction `stop()` ne fait rien pour le moment.
 
 ##### Sur l'appui du bouton bleu de la carte avec une gestion d'interruption lors de l'appui sur le bouton bleu (EXTI)
 En passant par un flag indiquant l’état courant du moteur (allumé/éteint), il n’y a qu’à faire basculer l’alimentation du hacheur (via les fonctions `start()`/`stop()`) vers l’état opposé à chaque activation de l’interruption EXTI3 (voir [stm32g4xx_it.c](Core/Src/stm32g4xx_it.c#L193) ligne 193).
