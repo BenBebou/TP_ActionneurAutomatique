@@ -13,7 +13,7 @@ Pour ce faire, plusieurs réalisations intermédiaires sont à implémenter:
 * Branchement et activation logicielle des broches utilisées de la carte Nucléo (UART pour communiquer les ordres via le shell, PWMs pour le contrôle des 4 transistors du hacheur, GPIOs, etc...)
 * Codage des fonctions appelables par le shell pour l'allumage et l'éteignage du moteur, et la sélection d'une vitesse à atteindre par celui-ci.
 * Réalisation de l'asservissement, via capteurs et boucle de traitements logiciels sur l'intensité électrique consommée et la vitesse de rotation du rotor.
-* Documentation du tout avec l'outil Doxygen : La documentation générée est disponible dans ce [fichier zip](DOC_html.zip).
+* Documentation du tout avec l'outil Doxygen : La documentation générée est disponible au format HTML dans ce [fichier zip](DOC_html.zip).
 
 ## Avancements en bref
 
