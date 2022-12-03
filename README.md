@@ -30,6 +30,8 @@ Pour ce faire, plusieurs réalisations intermédiaires sont à implémenter:
 
 ### Le Shell
 
+La base de ce TP est la conception d'un shell, à partir duquel nous pourrons envoyer les instructions de commande du hacheur. Une version de base de ce shell nous est fournie, à laquelle nous avons adjoint la reconnaissance des quelques commandes de bases décrites plus haut. Le code de ces commandes se trouve dans le fichier [fonctions_shell.c](Core/Src/fonctions_shell.c).
+
 ### PWM complémentaire décalée - STM32
 
 **Les temps morts :** 
